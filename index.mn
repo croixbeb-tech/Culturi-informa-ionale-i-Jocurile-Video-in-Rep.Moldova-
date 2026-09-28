@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Culturi informaționale în Republica Moldova — jocurile video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE2; --paper2:#E9E1CF; --ink:#17140E; --ink2:#57503E;
+  --red:#D8402B; --green:#2E9E63;
+  --crt:#0A120C; --phos:#63F29A; --phos-dim:#2E7A4F;
+  --line:#C8BEA6; --pix:"Press Start 2P",monospace; --grot:"Space Grotesk",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-padding-top:76px}
+body{font-family:var(--grot);font-size:17px;line-height:1.65;color:var(--ink);background:var(--paper);overflow-x:hidden}
+::selection{background:var(--red);color:var(--paper)}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* pagini */
+.page{display:none}
+.page.is-on{display:block;animation:pageIn .5s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* bara de sus */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper);border-bottom:2px solid var(--ink);
+  display:flex;align-items:center;gap:22px;height:56px;padding:0 22px}
+.brand{font-family:var(--pix);font-size:11px;text-decoration:none;letter-spacing:1px}
+.brand span{color:var(--red)}
+.topbar .links{display:flex;gap:18px;margin-left:auto}
+.topbar .links a{font-family:var(--pix);font-size:8px;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+.topbar .links a:hover,.topbar .links a.is-on{color:var(--red);border-color:var(--red)}
+.snd{margin-left:16px;display:flex;align-items:center;gap:7px;font-family:var(--pix);font-size:8px;
+  background:none;border:2px solid var(--ink);padding:7px 10px;color:var(--ink)}
+.snd:hover{background:var(--ink);color:var(--paper)}
+.snd.on{background:var(--ink);color:var(--phos)}
+.snd svg{display:block}
+
+/* anteturi */
+.kicker{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-family:var(--pix);font-size:8px;color:var(--red);margin-bottom:22px}
+.kicker .dot{width:7px;height:7px;background:var(--red);display:inline-block}
+.hero h1,.ph h1{font-size:clamp(42px,7.6vw,92px);line-height:.94;letter-spacing:-.03em;font-weight:700;text-transform:uppercase}
+.hero h1 .stroke,.ph h1 .stroke{color:var(--ink)}
+@supports(-webkit-text-stroke:2px black){
+  .hero h1 .stroke,.ph h1 .stroke{color:transparent;-webkit-text-stroke:2.5px var(--ink)}
+}
+.hero .sub,.ph .sub{max-width:560px;margin-top:20px;font-size:clamp(17px,2vw,20px);color:var(--ink2)}
+.hero{padding:110px 24px 40px;max-width:1080px;margin:0 auto}
+.ph{max-width:1080px;margin:0 auto;padding:120px 24px 24px}
+
+/* monitor CRT */
+.mon-frame{margin-top:44px;background:#24211B;border-radius:24px;padding:clamp(12px,3vw,26px);
+  box-shadow:0 24px 60px rgba(23,20,14,.22)}
+.mon-head{display:flex;align-items:center;gap:12px;font-family:var(--pix);font-size:8px;color:#8E866F;padding:2px 6px 12px}
+.mon-head .led{width:9px;height:9px;border-radius:50%;background:var(--phos);box-shadow:0 0 8px var(--phos)}
+.rec{margin-left:auto}
+.rec i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-left:8px;animation:blinkrec 1.4s steps(2) infinite}
+@keyframes blinkrec{50%{opacity:.15}}
+.screen{position:relative;aspect-ratio:8/5;background:var(--crt);border-radius:14px;overflow:hidden;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.75), inset 0 0 6px rgba(0,0,0,.9);animation:crtflick 4s steps(1) infinite}
+@keyframes crtflick{0%,92%,94%,98%,100%{filter:brightness(1)}93%{filter:brightness(1.06)}97%{filter:brightness(.97)}}
+.screen canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.scan{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.30) 3px 6px)}
+.glass{position:absolute;inset:0;pointer-events:none;opacity:.06;
+  background:linear-gradient(115deg,transparent 55%,#fff 78%,transparent 86%)}
+.roll{position:absolute;left:0;right:0;height:90px;pointer-events:none;
+  background:rgba(120,255,170,.045);animation:roll 7s linear infinite}
+@keyframes roll{from{top:-120px}to{top:110%}}
+.mon-foot{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px 6px 2px}
+.btn-start{font-family:var(--pix);font-size:10px;background:var(--red);color:var(--paper);border:none;
+  padding:15px 20px;box-shadow:5px 5px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.btn-start:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn-start:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.hint{font-family:var(--pix);font-size:8px;color:#8E866F;line-height:2}
+.scrollcue{display:flex;align-items:center;gap:10px;justify-content:center;margin:34px 0 8px;
+  font-family:var(--pix);font-size:8px;color:var(--ink2)}
+.scrollcue svg{animation:down 1.6s ease-in-out infinite}
+@keyframes down{50%{transform:translateY(5px)}}
+
+/* ticker */
+.ticker{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);overflow:hidden;background:var(--paper2)}
+.tk-inner{display:flex;width:max-content;animation:tk 32s linear infinite;white-space:nowrap}
+.ticker:hover .tk-inner{animation-play-state:paused}
+.tk-inner span{font-family:var(--pix);font-size:9px;padding:14px 26px;display:inline-block}
+.tk-inner span:nth-child(odd){color:var(--ink)}
+.tk-inner span:nth-child(even){color:var(--red)}
+@keyframes tk{to{transform:translateX(-50%)}}
+
+/* secțiuni */
+section{padding:86px 0 0}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:34px}
+.sec-head .no{font-family:var(--pix);font-size:12px;color:var(--red)}
+.sec-head h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;text-transform:uppercase;line-height:1}
+.sec-head .rule{flex:1;height:2px;background:var(--ink);align-self:center;min-width:40px}
+
+/* poveste */
+.story{display:grid;grid-template-columns:1.35fr .9fr;gap:56px;align-items:start}
+.story .txt p{margin-bottom:18px;max-width:56ch}
+.story .txt p.lead::first-letter{font-family:var(--pix);font-size:34px;color:var(--red);float:left;line-height:1;padding:6px 10px 0 0}
+.story blockquote{border-left:5px solid var(--red);padding:6px 0 6px 22px;margin:30px 0;
+  font-size:clamp(21px,2.6vw,28px);font-weight:700;line-height:1.3;letter-spacing:-.02em}
+.story blockquote cite{display:block;margin-top:12px;font-size:13px;font-style:normal;font-weight:500;color:var(--ink2)}
+.exhibit{border:2px dashed var(--ink);padding:26px;position:sticky;top:90px}
+.exhibit .tag{font-family:var(--pix);font-size:8px;color:var(--red);margin-bottom:22px}
+.exhibit .cap{font-size:14px;color:var(--ink2);margin-top:16px}
+.keydates{margin-top:24px;border-top:2px solid var(--ink)}
+.keydates div{display:flex;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.keydates dt{font-family:var(--pix);font-size:10px;color:var(--ink)}
+.keydates dd{font-size:14.5px;color:var(--ink2)}
+.tape{width:230px;max-width:100%;height:148px;background:var(--ink);border-radius:10px;position:relative;margin:6px auto 0;
+  box-shadow:6px 6px 0 rgba(23,20,14,.15)}
+.tape::before,.tape::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--paper2);top:10px}
+.tape::before{left:10px}.tape::after{right:10px}
+.tape .label{position:absolute;top:14px;left:26px;right:26px;height:34px;background:var(--paper);color:var(--ink);
+  font-family:var(--pix);font-size:7px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.6;
+  clip-path:polygon(0 0,100% 0,100% 100%,85% 100%,80% 80%,20% 80%,15% 100%,0 100%)}
+.tape .win{position:absolute;left:50%;top:62px;transform:translateX(-50%);width:150px;height:52px;background:var(--paper);
+  border-radius:6px;display:flex;align-items:center;justify-content:space-around;padding:0 14px}
+.reel{width:34px;height:34px;border-radius:50%;position:relative;
+  background:repeating-conic-gradient(var(--ink) 0 22deg,var(--paper2) 22deg 45deg);animation:spin 5s linear infinite}
+.reel::after{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--red)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tape .hole{position:absolute;bottom:14px;width:22px;height:22px;border-radius:50%;background:var(--paper)}
+.tape .h1{left:46px}.tape .h2{right:46px}
+
+/* timeline */
+.tl-tabs{display:flex;border:2px solid var(--ink)}
+.tl-tab{flex:1;background:var(--paper);border:none;border-right:2px solid var(--ink);padding:16px 10px;text-align:left;
+  display:flex;flex-direction:column;gap:6px;transition:background .15s}
+.tl-tab:last-child{border-right:none}
+.tl-tab b{font-family:var(--pix);font-size:10px;font-weight:400}
+.tl-tab span{font-family:var(--pix);font-size:7px;color:var(--ink2)}
+.tl-tab:hover{background:var(--paper2)}
+.tl-tab.is-on{background:var(--ink)}
+.tl-tab.is-on b{color:var(--phos)}
+.tl-tab.is-on span{color:var(--paper2)}
+.tl-track{position:relative;height:14px;margin-top:8px}
+.tl-track::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:var(--ink)}
+.tl-cursor{position:absolute;top:0;width:25%;height:14px;background:var(--red);transition:left .35s cubic-bezier(.8,0,.2,1);
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.tl-pane{display:none;grid-template-columns:1.25fr .8fr;gap:48px;align-items:end;padding-top:36px}
+.tl-pane.is-on{display:grid;animation:paneIn .5s ease both}
+@keyframes paneIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tl-pane h3{font-size:clamp(24px,3.4vw,36px);letter-spacing:-.02em;margin-bottom:14px;text-transform:uppercase}
+.tl-pane p{max-width:52ch;color:var(--ink2)}
+.tl-stat b{display:block;font-size:clamp(48px,7vw,84px);line-height:1;letter-spacing:-.04em;font-weight:700;color:var(--red)}
+.tl-stat small{display:block;margin-top:10px;font-size:14px;color:var(--ink2);max-width:30ch;line-height:1.5}
+
+/* accordion */
+.acc{border-top:2px solid var(--ink)}
+.acc:last-child{border-bottom:2px solid var(--ink)}
+.acc-head{width:100%;display:grid;grid-template-columns:70px 1fr 40px;align-items:center;background:none;border:none;
+  padding:24px 4px;text-align:left;gap:8px;transition:background .15s}
+.acc-head:hover{background:var(--paper2)}
+.acc-no{font-family:var(--pix);font-size:11px;color:var(--red)}
+.acc-t{font-size:clamp(19px,2.6vw,27px);font-weight:700;letter-spacing:-.01em}
+.acc-x{justify-self:end;width:34px;height:34px;display:grid;place-items:center;border:2px solid var(--ink);
+  transition:transform .3s,background .15s,color .15s}
+.acc.open .acc-x{transform:rotate(45deg);background:var(--ink);color:var(--paper)}
+.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s ease}
+.acc.open .acc-body{grid-template-rows:1fr}
+.acc-body>div{overflow:hidden}
+.acc-in{padding:0 4px 28px 70px;max-width:64ch;color:var(--ink2)}
+
+/* quiz */
+.console{border:3px solid var(--ink);background:var(--paper);box-shadow:10px 10px 0 var(--ink)}
+.con-top{background:var(--ink);display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 14px}
+.lvl-seg{display:flex}
+.lvl{font-family:var(--pix);font-size:8px;background:transparent;color:var(--paper2);border:1px solid var(--paper2);
+  padding:9px 12px;line-height:1.6}
+.lvl+.lvl{margin-left:-1px}
+.lvl:hover{color:var(--phos)}
+.lvl.is-on{background:var(--red);border-color:var(--red);color:var(--paper)}
+.con-badge{margin-left:auto;font-family:var(--pix);font-size:8px;color:var(--phos)}
+.con-body{padding:clamp(20px,4vw,40px);min-height:380px}
+.q-progress{display:flex;gap:8px;margin-bottom:22px}
+.q-progress i{width:18px;height:18px;border:2px solid var(--ink);background:var(--paper)}
+.q-progress i.ok{background:var(--green);border-color:var(--green)}
+.q-progress i.err{background:var(--red);border-color:var(--red)}
+.q-progress i.cur{animation:cellpulse 1s steps(2) infinite}
+@keyframes cellpulse{50%{background:var(--ink)}}
+.q-count{font-family:var(--pix);font-size:8px;color:var(--red);margin-bottom:10px}
+.q-title{font-size:clamp(20px,2.8vw,29px);font-weight:700;letter-spacing:-.01em;margin-bottom:26px;max-width:26ch;line-height:1.3}
+.q-opts{display:grid;gap:12px;max-width:560px}
+.q-opt{display:flex;align-items:center;gap:16px;text-align:left;border:2px solid var(--ink);background:var(--paper);
+  padding:15px 18px;font-size:16.5px;transition:transform .1s,box-shadow .1s}
+.q-opt span{font-family:var(--pix);font-size:9px;border:2px solid var(--ink);padding:6px 8px;flex:none}
+.q-opt:not(:disabled):hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.q-opt.ok{background:var(--green);color:var(--paper);border-color:var(--green)}
+.q-opt.ok span{background:var(--paper);color:var(--green);border-color:var(--paper)}
+.q-opt.err{background:var(--red);color:var(--paper);border-color:var(--red)}
+.q-opt.err span{background:var(--paper);color:var(--red);border-color:var(--paper)}
+.q-opt:disabled{cursor:default}
+.q-feed{margin-top:26px;max-width:560px;border-top:2px solid var(--ink);padding-top:18px}
+.q-verdict{font-family:var(--pix);font-size:11px;margin-bottom:12px}
+.q-verdict.ok{color:var(--green)}
+.q-verdict.err{color:var(--red)}
+.q-why{font-size:15px;color:var(--ink2);margin-bottom:18px}
+.q-next{display:inline-flex;align-items:center;gap:10px;font-family:var(--pix);font-size:9px;background:var(--ink);
+  color:var(--paper);border:none;padding:13px 16px;box-shadow:4px 4px 0 var(--red);transition:transform .1s,box-shadow .1s}
+.q-next:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--red)}
+.q-final{text-align:center;padding:30px 0 10px}
+.q-final .score{font-family:var(--pix);font-size:52px}
+.q-final .score small{font-size:20px;color:var(--ink2)}
+.q-final .rank{font-family:var(--pix);font-size:11px;color:var(--red);margin:18px 0 30px}
+.q-restart{display:inline-flex;align-items:center;gap:10px;font-family:var(--pix);font-size:9px;background:var(--paper);
+  color:var(--ink);border:2px solid var(--ink);padding:13px 16px;transition:transform .1s,box-shadow .1s}
+.q-restart:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+
+/* muzeu */
+.muz{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:start}
+.muz-list{display:flex;flex-direction:column;border:2px solid var(--ink)}
+.muz-item{display:grid;grid-template-columns:52px 1fr auto;gap:8px;align-items:baseline;background:none;border:none;
+  border-bottom:2px solid var(--ink);padding:15px 16px;text-align:left;font-family:var(--grot);transition:background .15s}
+.muz-item:last-child{border-bottom:none}
+.muz-item b{font-family:var(--pix);font-size:9px;color:var(--red);font-weight:400}
+.muz-item span{font-size:17px;font-weight:700}
+.muz-item em{font-family:var(--pix);font-size:8px;font-style:normal;color:var(--ink2)}
+.muz-item:hover{background:var(--paper2)}
+.muz-item.is-on{background:var(--ink);color:var(--paper)}
+.muz-item.is-on b{color:var(--phos)}
+.muz-item.is-on em{color:var(--paper2)}
+.muz-detail{border:2px dashed var(--ink);padding:34px;display:grid;grid-template-columns:320px 1fr;gap:38px;
+  align-items:center;min-height:340px}
+.muz-detail.fadein{animation:paneIn .45s ease both}
+.muz-stage{position:relative;width:300px;height:300px;display:grid;place-items:center;background:var(--paper2);
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:24px 24px}
+.muz-stage canvas{image-rendering:pixelated}
+.muz-load{position:absolute;bottom:10px;left:14px;right:14px;height:12px;border:2px solid var(--ink);background:var(--paper)}
+.muz-load i{display:block;height:100%;width:0;background:var(--red)}
+.muz-info .muz-tag{font-family:var(--pix);font-size:8px;color:var(--red);margin-bottom:12px;line-height:1.8}
+.muz-info h3{font-size:clamp(24px,3vw,34px);margin-bottom:18px;text-transform:uppercase;letter-spacing:-.01em}
+.muz-meta{display:flex;gap:26px;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);
+  padding:12px 0;margin-bottom:18px}
+.muz-meta dt{font-family:var(--pix);font-size:7px;color:var(--ink2);margin-bottom:5px}
+.muz-meta dd{font-size:14px;font-weight:600}
+.muz-info>p{color:var(--ink2);max-width:46ch}
+
+/* cifre */
+.statrow{display:grid;grid-template-columns:300px 1fr;gap:36px;align-items:center;border-top:2px solid var(--ink);padding:34px 0}
+.statrow:last-of-type{border-bottom:2px solid var(--ink)}
+.statrow b{font-size:clamp(40px,5.6vw,72px);font-weight:700;letter-spacing:-.04em;color:var(--red);line-height:1}
+.statrow p{max-width:52ch;color:var(--ink2);font-size:17.5px}
+
+/* sondaj */
+.poll{border:3px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:clamp(22px,4vw,40px);max-width:640px;background:var(--paper)}
+.poll-q{font-size:clamp(21px,2.6vw,27px);font-weight:700;margin-bottom:22px;max-width:24ch;letter-spacing:-.01em}
+.poll-opts{display:grid;gap:12px}
+.poll-opt{display:flex;align-items:center;gap:16px;text-align:left;border:2px solid var(--ink);background:var(--paper);
+  padding:15px 18px;font-size:16.5px;transition:transform .1s,box-shadow .1s}
+.poll-opt span{font-family:var(--pix);font-size:9px;border:2px solid var(--ink);padding:6px 8px;flex:none}
+.poll-opt:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.prow{margin-bottom:16px}
+.prow .plabel{display:flex;justify-content:space-between;gap:16px;font-size:15px;font-weight:600;margin-bottom:7px;align-items:baseline}
+.prow .plabel b{font-family:var(--pix);font-size:9px;color:var(--red);flex:none}
+.pbar{height:20px;border:2px solid var(--ink);background:var(--paper2);position:relative}
+.pbar i{position:absolute;top:0;bottom:0;left:0;width:0;background:var(--ink);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.prow.you .pbar i{background:var(--red)}
+.poll-reset{margin-top:18px;font-family:var(--pix);font-size:8px;background:none;border:2px solid var(--ink);padding:10px 12px}
+.poll-reset:hover{background:var(--ink);color:var(--paper)}
+.poll-note{margin-top:18px;font-family:var(--pix);font-size:7px;color:var(--ink2);line-height:2}
+
+/* vocea */
+.qwall{max-width:900px}
+.q{border-left:5px solid var(--red);padding:6px 0 6px 24px;margin-bottom:46px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.q cite{display:block;margin-top:12px;font-size:13px;font-style:normal;font-weight:500;color:var(--ink2);letter-spacing:0}
+.q1{font-size:clamp(22px,3vw,32px);max-width:34ch}
+.q2{font-size:clamp(19px,2.4vw,26px);max-width:38ch;margin-left:8%}
+.q3{font-size:clamp(21px,2.8vw,30px);max-width:30ch}
+.q4{font-size:clamp(19px,2.4vw,25px);max-width:40ch;margin-left:14%}
+.q5{font-size:clamp(20px,2.6vw,28px);max-width:34ch;margin-left:4%}
+
+/* încheiere + navigare */
+.closing{border:3px solid var(--ink);padding:clamp(26px,5vw,54px);background:var(--paper2);box-shadow:10px 10px 0 var(--ink)}
+.closing h3{font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;margin-bottom:16px;letter-spacing:-.02em}
+.closing p{max-width:58ch;color:var(--ink2);margin-bottom:28px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.cta{font-family:var(--pix);font-size:9px;text-decoration:none;padding:14px 18px;background:var(--red);color:var(--paper);
+  box-shadow:4px 4px 0 var(--ink);display:inline-flex;gap:10px;align-items:center;transition:transform .12s,box-shadow .12s}
+.cta:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.cta.ghost{background:var(--paper);color:var(--ink)}
+.nextsala{display:flex;align-items:center;gap:22px;flex-wrap:wrap;border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);padding:34px 24px;text-decoration:none;margin:80px 0 90px;transition:background .2s}
+.nextsala:hover{background:var(--paper2)}
+.ns-k{font-family:var(--pix);font-size:8px;color:var(--red)}
+.ns-t{font-size:clamp(24px,4vw,44px);font-weight:700;letter-spacing:-.02em;text-transform:uppercase;transition:transform .25s,color .25s}
+.nextsala:hover .ns-t{transform:translateX(10px);color:var(--red)}
+.nextsala svg{margin-left:auto;flex:none;transition:transform .25s}
+.nextsala:hover svg{transform:translateX(8px)}
+
+/* footer */
+footer{margin-top:20px;background:var(--ink);color:var(--paper)}
+.f-in{padding:64px 24px 34px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;max-width:1080px;margin:0 auto}
+.f-big{font-size:clamp(30px,4.6vw,54px);font-weight:700;line-height:1.02;letter-spacing:-.03em;text-transform:uppercase}
+.f-big em{font-style:normal;color:var(--phos)}
+.f-col{display:flex;flex-direction:column;justify-content:center;gap:14px}
+.f-lbl{font-family:var(--pix);font-size:8px;color:#8E866F}
+.f-nav{display:flex;gap:22px;flex-wrap:wrap}
+.f-nav a{font-family:var(--pix);font-size:9px;text-decoration:none;color:var(--paper2);border-bottom:2px solid transparent;padding-bottom:4px}
+.f-nav a:hover{color:var(--phos);border-color:var(--phos)}
+.f-meta{grid-column:1/-1;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;border-top:1px solid #3A352C;
+  padding-top:22px;font-family:var(--pix);font-size:7px;color:#8E866F;margin-top:20px}
+
+/* toast */
+#toasts{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:70;display:flex;flex-direction:column;gap:10px;align-items:center}
+.toast{background:var(--ink);color:var(--phos);font-family:var(--pix);font-size:9px;padding:13px 18px;
+  box-shadow:5px 5px 0 rgba(23,20,14,.3);animation:tin .25s ease both;white-space:nowrap}
+.toast.out{animation:tout .25s ease both}
+@keyframes tin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes tout{to{opacity:0;transform:translateY(12px)}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* responsive */
+@media(max-width:960px){
+  .story{grid-template-columns:1fr;gap:40px}
+  .exhibit{position:static}
+  .tl-pane{grid-template-columns:1fr;gap:22px;align-items:start}
+  .f-in{grid-template-columns:1fr;gap:40px}
+  .muz{grid-template-columns:1fr}
+  .muz-list{flex-direction:row;overflow-x:auto}
+  .muz-item{border-bottom:none;border-right:2px solid var(--ink);flex:none;grid-template-columns:44px 1fr;min-width:150px}
+  .muz-item em{display:none}
+  .muz-detail{grid-template-columns:1fr;justify-items:center}
+  .muz-stage{margin:0 auto}
+  .statrow{grid-template-columns:1fr;gap:14px;align-items:start}
+}
+@media(max-width:640px){
+  .topbar .links{display:none}
+  .snd{margin-left:auto}
+  .tl-tabs{flex-wrap:wrap}
+  .tl-tab{flex:1 1 50%;border-bottom:2px solid var(--ink)}
+  .tl-tab:nth-child(2n){border-right:none}
+  .tl-tab:nth-child(3),.tl-tab:nth-child(4){border-bottom:none}
+  .tl-cursor{display:none}
+  .acc-head{grid-template-columns:44px 1fr 40px}
+  .acc-in{padding-left:4px}
+  .mon-foot{flex-direction:column;align-items:flex-start}
+  .con-badge{margin-left:0;width:100%}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="topbar">
+  <a class="brand" href="#/">CI<span>//</span>RM</a>
+  <div class="links">
+    <a href="#/" data-r="">ACASĂ</a>
+    <a href="#/muzeu" data-r="muzeu">MUZEU</a>
+    <a href="#/voce" data-r="voce">VOCE</a>
+  </div>
+  <button id="sndBtn" class="snd" type="button" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+      <path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+    </svg>
+    <span id="sndLabel">SUNET: OFF</span>
+  </button>
+</nav>
+
+<!-- ================== PAGINA 1: ACASĂ ================== -->
+<div class="page is-on" id="p-home">
+
+<header class="hero" id="top">
+  <div class="kicker">
+    <span>REVISTA INTERACTIVĂ</span><span class="dot"></span>
+    <span>CULTURA DIGITALĂ</span><span class="dot"></span>
+    <span>CHIȘINĂU</span>
+  </div>
+  <h1>CULTURI<br><span class="stroke">INFORMAȚIONALE</span></h1>
+  <p class="sub">în Republica Moldova — și povestea jocurilor video care au modelat o generație de cetățeni.</p>
+
+  <div class="mon-frame reveal">
+    <div class="mon-head"><span class="led"></span><span>MONITOR // CRT-01</span><span class="rec">REC<i></i></span></div>
+    <div class="screen" id="screen">
+      <canvas id="pong"></canvas>
+      <div class="scan" aria-hidden="true"></div>
+      <div class="roll" aria-hidden="true"></div>
+      <div class="glass" aria-hidden="true"></div>
+    </div>
+    <div class="mon-foot">
+      <button id="startBtn" class="btn-start" type="button">INSEREAZĂ JETON</button>
+      <p class="hint">MOUSE / SĂGEȚI / W-S — PRIMUL LA 5 PUNCTE CÂȘTIGĂ</p>
+    </div>
+  </div>
+
+  <div class="scrollcue">
+    <span>DERULEAZĂ</span>
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 4v14M6 12l6 6 6-6"/></svg>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="tk-inner" id="tk">
+  <span>CLUBURI DE CALCULATOARE</span><span>//</span>
+  <span>CS 1.6</span><span>//</span>
+  <span>CASETE AUDIO</span><span>//</span>
+  <span>ZX-SPECTRUM</span><span>//</span>
+  <span>DIASPORA CONECTATĂ</span><span>//</span>
+  <span>E-SPORT ÎN ROMÂNĂ</span><span>//</span>
+  <span>ENGLEZA ÎNVĂȚATĂ ÎN MENIURI</span><span>//</span>
+  <span>1994 → 2024</span><span>//</span>
+</div></div>
+
+<main>
+<section id="poveste" class="wrap">
+  <div class="sec-head reveal"><span class="no">01</span><h2>DE UNDE A ÎNCEPUT</h2><span class="rule"></span></div>
+  <div class="story">
+    <div class="txt reveal">
+      <p class="lead">Primele jocuri au ajuns la noi pe calculatoare sovietice — Electronika BK și clone după ZX-Spectrum —, instalate câte una-două în școli și în cluburi de pionieri. Cine prindea zece minute la ecran era norocos: senzația exista, chiar dacă cuvântul încă nu.</p>
+      <p>Au urmat cluburile plătite la oră și casetele schimbate între colegi ca niște comori — un joc se încărca 30 de minute și se strica exact când începea partea bună. Odată cu PC-urile, Counter-Strike a devenit limbajul comun al unei generații întregi.</p>
+      <p>Când internetul a ajuns acasă, cluburile s-au golit aproape peste noapte. Dar comunitatea — prieteniile, echipele, obiceiul de a ne întâlni în fața unui ecran — rămăsese deja formată. Astăzi aceeași energie alimentează streamingul, e-sport-ul și o bună parte din industria IT locală.</p>
+      <blockquote>„Nu jucam ca să câștigăm. Jucam ca să fim împreună.”
+        <cite>— un fost „campion” de cartier, Chișinău</cite>
+      </blockquote>
+    </div>
+    <aside class="exhibit reveal">
+      <div class="tag">EXPONAT NR. 001</div>
+      <div class="tape" role="img" aria-label="Casetă audio cu jocuri, anii '90">
+        <div class="label">JOCURI ’93 — MIX<br>DOAR PENTRU PRIETENI</div>
+        <div class="win"><div class="reel"></div><div class="reel"></div></div>
+        <div class="hole h1"></div><div class="hole h2"></div>
+      </div>
+      <p class="cap">Caseta cu jocuri, ~1993. 30 de minute de încărcare, cinci minute de distracție — dacă nu se strica.</p>
+      <dl class="keydates">
+        <div><dt>’80</dt><dd>primele calculatoare în școli</dd></div>
+        <div><dt>’94</dt><dd>primele cluburi plătite la oră</dd></div>
+        <div><dt>’01</dt><dd>boom-ul cluburilor de internet</dd></div>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<section id="ere" class="wrap">
+  <div class="sec-head reveal"><span class="no">02</span><h2>PATRU ERE</h2><span class="rule"></span></div>
+  <div class="reveal">
+    <div class="tl-tabs">
+      <button class="tl-tab is-on" type="button"><b>1990–96</b><span>CLUBURILE</span></button>
+      <button class="tl-tab" type="button"><b>1997–04</b><span>EPOCA DE AUR</span></button>
+      <button class="tl-tab" type="button"><b>2005–12</b><span>ACASĂ, ONLINE</span></button>
+      <button class="tl-tab" type="button"><b>2013–AZI</b><span>E-SPORT & DIASPORA</span></button>
+    </div>
+    <div class="tl-track"><div class="tl-cursor" id="tlCursor"></div></div>
+    <div class="tl-pane is-on">
+      <div><h3>Cluburile de cartier</h3>
+        <p>Câteva calculatoare, un supraveghetor sever și o coadă la ușă. Se juca pe rând: cine pierdea, ceda scaunul. Aici s-au născut primele „competiții” și primele prietenii pe viață.</p></div>
+      <div class="tl-stat"><b>4</b><small>prieteni pe un singur calculator, jucând pe rând</small></div>
+    </div>
+    <div class="tl-pane">
+      <div><h3>Epoca de aur a cluburilor</h3>
+        <p>Cluburile de internet devin culoarul de cartier: Counter-Strike 1.6, StarCraft, FIFA. Se juca pe echipe, se striga pe holuri, se rămânea „după program”.</p></div>
+      <div class="tl-stat"><b>1.6</b><small>versiunea care a educat o generație întreagă</small></div>
+    </div>
+    <div class="tl-pane">
+      <div><h3>Acasă, online</h3>
+        <p>Internetul ajunge în apartamente: lumi online masive, primele abonamente, primele nopți pierdute. Cluburile se golesc — dar era continuă, de data asta în papuci.</p></div>
+      <div class="tl-stat"><b>56k</b><small>modemul care a mutat clubul în living</small></div>
+    </div>
+    <div class="tl-pane">
+      <div><h3>E-sport & diaspora</h3>
+        <p>Turnee, echipe, streaming în română și o diasporă uriașă care joacă seara „cu cei de acasă”. Mulți dintre cei care studiau jocurile construiesc astăzi industria IT locală.</p></div>
+      <div class="tl-stat"><b>≈1M</b><small>moldoveni peste hotare — mulți rămân conectați printr-un server comun</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="influenta" class="wrap">
+  <div class="sec-head reveal"><span class="no">03</span><h2>CE AU SCHIMBAT JOCURILE</h2><span class="rule"></span></div>
+  <div class="accs reveal">
+    <div class="acc open">
+      <button class="acc-head" type="button" aria-expanded="true">
+        <span class="acc-no">01</span><span class="acc-t">Engleza, învățată pe gratis</span>
+        <span class="acc-x"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="acc-body"><div><p class="acc-in">Meniuri, dialoguri și tutoriale fără traducere — imersiune forțată înainte de prima oră de engleză din școală. O generație întreagă și-a perfecționat vocabularul în ecranele de încărcare.</p></div></div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" type="button" aria-expanded="false">
+        <span class="acc-no">02</span><span class="acc-t">Poarta de intrare în IT</span>
+        <span class="acc-x"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="acc-body"><div><p class="acc-in">Mulți programatori moldoveni spun că prima linie de „cod” a fost un mod sau un trainer pentru un joc. Astăzi Moldova are una dintre cele mai dense comunități IT din regiune — și o parte din merit e chiar a jocurilor.</p></div></div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" type="button" aria-expanded="false">
+        <span class="acc-no">03</span><span class="acc-t">Punți peste granițe</span>
+        <span class="acc-x"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="acc-body"><div><p class="acc-in">Cu până la un milion de moldoveni peste hotare, serverul comun a devenit camera de familie virtuală: seara, un meci cu frații și prietenii rămași acasă, la distanță de un „click”.</p></div></div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" type="button" aria-expanded="false">
+        <span class="acc-no">04</span><span class="acc-t">Comunități și e-sport</span>
+        <span class="acc-x"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="acc-body"><div><p class="acc-in">Turnee locale, echipe de cartier devenite echipe reale, streameri în română — jocurile au creat spații în care moldovenii se regăsesc zilnic, dincolo de granițe și fusuri orare.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="wrap">
+  <div class="sec-head reveal"><span class="no">04</span><h2>NIVEL DE TEST</h2><span class="rule"></span></div>
+  <div class="console reveal">
+    <div class="con-top">
+      <div class="lvl-seg">
+        <button class="lvl is-on" type="button" data-l="n1">NIVELUL 1 — PRIMII ANI</button>
+        <button class="lvl" type="button" data-l="n2">NIVELUL 2 — AZI</button>
+      </div>
+      <div class="con-badge">QUIZ // 3 ÎNTREBĂRI</div>
+    </div>
+    <div class="con-body" id="quizBody" aria-live="polite"></div>
+  </div>
+</section>
+</main>
+
+<div class="wrap">
+  <a class="nextsala reveal" href="#/muzeu">
+    <span class="ns-k">SALA URMĂTOARE</span>
+    <span class="ns-t">MUZEUL GENERAȚIEI</span>
+    <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</div>
+</div>
+
+<!-- ================== PAGINA 2: MUZEU ================== -->
+<div class="page" id="p-muzeu">
+
+<header class="ph">
+  <div class="kicker">
+    <span>SALA NR. 1</span><span class="dot"></span>
+    <span>EXPOZIȚIE PERMANENTĂ</span><span class="dot"></span>
+    <span>OPT EXPONATE</span>
+  </div>
+  <h1>MUZEUL<br><span class="stroke">GENERAȚIEI</span></h1>
+  <p class="sub">Obiectele care explică serile copilăriei noastre. Alege un exponat — se „încarcă” ca pe vremuri, pixel cu pixel.</p>
+</header>
+
+<section class="wrap">
+  <div class="sec-head reveal"><span class="no">05</span><h2>GALERIA</h2><span class="rule"></span></div>
+  <div class="muz reveal">
+    <div class="muz-list" id="muzList"></div>
+    <div class="muz-detail fadein" id="muzDetail">
+      <div class="muz-stage">
+        <canvas id="spr" width="10" height="10"></canvas>
+        <div class="muz-load" aria-hidden="true"><i id="sprBar"></i></div>
+      </div>
+      <div class="muz-info">
+        <div class="muz-tag" id="mTag"></div>
+        <h3 id="mName"></h3>
+        <dl class="muz-meta">
+          <div><dt>ANII</dt><dd id="mYears"></dd></div>
+          <div><dt>PLATFORMA</dt><dd id="mPlat"></dd></div>
+          <div><dt>UNDE SE JUCA</dt><dd id="mWhere"></dd></div>
+        </dl>
+        <p id="mText"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <a class="nextsala reveal" href="#/voce">
+    <span class="ns-k">SALA URMĂTOARE</span>
+    <span class="ns-t">CIFRE & VOCE</span>
+    <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</div>
+</div>
+
+<!-- ================== PAGINA 3: VOCE ================== -->
+<div class="page" id="p-voce">
+
+<header class="ph">
+  <div class="kicker">
+    <span>SALA NR. 2</span><span class="dot"></span>
+    <span>ARHIVĂ VIE</span><span class="dot"></span>
+    <span>CIFRE + VOCE</span>
+  </div>
+  <h1>CIFRE <span class="stroke">&amp; VOCE</span></h1>
+  <p class="sub">Ce rămâne după ce se stinge ecranul: numere mari, un sondaj de cartier și oamenii care au crescut cu un joystick în mână.</p>
+</header>
+
+<section class="wrap">
+  <div class="sec-head reveal"><span class="no">06</span><h2>CIFRELE</h2><span class="rule"></span></div>
+  <div class="reveal">
+    <div class="statrow"><b>≈1.000.000</b><p>moldoveni muncesc sau trăiesc peste hotare. Seara, o bună parte se „întorc acasă” printr-un server comun: un meci cu frații, o partidă cu foștii colegi de clasă.</p></div>
+    <div class="statrow"><b>1.6</b><p>versiunea unui joc care a devenit limbaj comun. „Hai un meci” însemna orice: prietenie, armistițiu, sărbătoarea examenului trecut.</p></div>
+    <div class="statrow"><b>30:00 → 0:30</b><p>cât dura odinioară încărcarea unui joc de pe casetă — și cât durează azi descărcarea unuia întreg. Rabdarea nu s-a întors, dar nici nu mai e nevoie de ea.</p></div>
+    <div class="statrow"><b>0 MDL</b><p>cât a costat „cursul” de engleză din meniurile jocurilor. Taxa se plătea în răbdare, reporniri și dicționare pierdute pe sub pat.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head reveal"><span class="no">07</span><h2>SONDAJUL DE CARTIER</h2><span class="rule"></span></div>
+  <div class="poll reveal" id="poll"></div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head reveal"><span class="no">08</span><h2>VOCEA</h2><span class="rule"></span></div>
+  <div class="qwall reveal">
+    <blockquote class="q q1">„Am învățat engleza din Heroes III. La școală, profa mă întreba de unde știu cuvântul «necromancer».”
+      <cite>— Andrei, 34 — dezvoltator de software</cite></blockquote>
+    <blockquote class="q q2">„Tata mă lua la club în weekend. Acum luăm meciuri seara — el e în Italia, eu sunt în Chișinău.”
+      <cite>— Vlada, 27 — asistentă medicală</cite></blockquote>
+    <blockquote class="q q3">„Prima mea linie de cod a fost un trainer pentru CS. A doua a fost salariul.”
+      <cite>— Sergiu, 31 — programator</cite></blockquote>
+    <blockquote class="q q4">„Tot ce știu despre geografie știu din hărți de jocuri. Și derutele, pe deasupra.”
+      <cite>— Ion, 19 — student</cite></blockquote>
+    <blockquote class="q q5">„Clubul era rețeaua noastră socială. Singura care mergea și când nu avea net.”
+      <cite>— Radu, 40 — fost proprietar de club</cite></blockquote>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="closing reveal">
+    <h3>Jocul continuă</h3>
+    <p>Aceeași curiozitate care umplea cluburile la oră plătită alimentează astăzi olimpiadele de informatică, startup-urile și comunitățile online din Moldova. Ecranele s-au schimbat, tastele s-au schimbat — jucătorii, nu.</p>
+    <div class="cta-row">
+      <a class="cta" href="#/">REIA NIVELUL DE TEST
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="cta ghost" href="#/muzeu">ÎNAPOI ÎN MUZEU</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <a class="nextsala reveal" href="#/">
+    <span class="ns-k">PRIMA SALĂ</span>
+    <span class="ns-t">ACASĂ</span>
+    <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</div>
+</div>
+
+<footer>
+  <div class="f-in">
+    <div class="f-big">SFÂRȘIT DE NIVEL.<br><em>MULȚUMESC CĂ AI JUCAT</em></div>
+    <div class="f-col">
+      <span class="f-lbl">SĂLI</span>
+      <div class="f-nav">
+        <a href="#/">ACASĂ</a>
+        <a href="#/muzeu">MUZEU</a>
+        <a href="#/voce">VOCE</a>
+      </div>
+    </div>
+    <div class="f-meta"><span>CULTURI INFORMAȚIONALE // REPUBLICA MOLDOVA</span><span>FĂCUT CU CURSOR ȘI CAFFEINĂ</span></div>
+  </div>
+</footer>
+
+<div id="toasts"></div>
+
+<script>
+/* ============ utilitare ============ */
+function $(s, r){ return (r || document).querySelector(s); }
+function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+function safe(fn){ try{ fn(); }catch(err){ if(window.console) console.error('[CI//RM]', err); } }
+
+var SITE = { page: 'home' };
+
+/* stocare locală, protejată (funcționează și dacă browserul o blochează) */
+var store = {
+  get: function(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set: function(k, v){ try{ localStorage.setItem(k, v); }catch(e){} },
+  del: function(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+
+/* ============ sunet (generat local, fără fișiere) ============ */
+var AC = null, soundOn = false;
+function audioCtx(){
+  if(!AC){
+    var C = window.AudioContext || window.webkitAudioContext;
+    if(!C) return null;
+    AC = new C();
+  }
+  if(AC.state === 'suspended'){ AC.resume(); }
+  return AC;
+}
+function beep(f, d, type, g){
+  if(!soundOn) return;
+  f = f || 440; d = d || .08; type = type || 'square'; g = g || .05;
+  try{
+    var a = audioCtx(); if(!a) return;
+    var o = a.createOscillator(), v = a.createGain();
+    o.type = type; o.frequency.value = f;
+    v.gain.setValueAtTime(g, a.currentTime);
+    v.gain.exponentialRampToValueAtTime(.0001, a.currentTime + d);
+    o.connect(v); v.connect(a.destination);
+    o.start(); o.stop(a.currentTime + d);
+  }catch(e){}
+}
+(function(){
+  var btn = $('#sndBtn'), lbl = $('#sndLabel');
+  btn.addEventListener('click', function(){
+    soundOn = !soundOn;
+    btn.classList.toggle('on', soundOn);
+    btn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+    lbl.textContent = soundOn ? 'SUNET: ON' : 'SUNET: OFF';
+    if(soundOn){ audioCtx(); beep(523,.07); }
+    toast(soundOn ? 'SUNET PORNIT' : 'SUNET OPRIT');
+  });
+})();
+
+/* ============ toast ============ */
+function toast(msg){
+  var box = $('#toasts');
+  if(!box) return;
+  var t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  box.appendChild(t);
+  setTimeout(function(){ t.classList.add('out'); setTimeout(function(){ t.remove(); }, 260); }, 2100);
+}
+
+/* ============ ROUTERUL — rulează PRIMUL, ca navigația să meargă orice s-ar întâmpla ============ */
+(function(){
+  var PAGES  = { '':'p-home', 'home':'p-home', 'muzeu':'p-muzeu', 'voce':'p-voce' };
+  var TITLES = {
+    home: 'Culturi informaționale în Republica Moldova — jocurile video',
+    muzeu: 'Muzeul generației — Culturi informaționale RM',
+    voce: 'Cifre & voce — Culturi informaționale RM'
+  };
+  function route(){
+    var r = (location.hash || '').replace(/^#\/?/, '').toLowerCase();
+    if(!PAGES.hasOwnProperty(r)) r = '';
+    var pg = document.getElementById(PAGES[r]);
+    if(!pg) pg = document.getElementById('p-home');
+    $$('.page').forEach(function(p){ p.classList.remove('is-on'); });
+    pg.classList.add('is-on');
+    SITE.page = (r === 'muzeu' || r === 'voce') ? r : 'home';
+    $$('.topbar .links a').forEach(function(a){
+      a.classList.toggle('is-on', (a.getAttribute('data-r') || '') === r);
+    });
+    document.title = TITLES[SITE.page] || TITLES.home;
+    if(SITE.page === 'muzeu' && typeof window.__muzRefresh === 'function') window.__muzRefresh();
+    /* urcăm pagina sus, instant */
+    var h = document.documentElement;
+    h.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    /* asigurăm vizibilitatea conținutului deja în ecran */
+    requestAnimationFrame(function(){
+      h.style.scrollBehavior = '';
+      $$('.reveal', pg).forEach(function(el){
+        var b = el.getBoundingClientRect();
+        if(b.top < window.innerHeight * .95) el.classList.add('in');
+      });
+    });
+  }
+  window.addEventListener('hashchange', route);
+  route();
+})();
+
+/* ============ PONG pe ecranul CRT ============ */
+safe(function(){
+  var scr = $('#screen'), cv = $('#pong');
+  if(!scr || !cv) return;
+  var ctx = cv.getContext('2d');
+  var VW = 800, VH = 500, PH = 45, PW = 12, PX = 30, WIN = 5;
+
+  function fit(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var r = scr.getBoundingClientRect();
+    cv.width  = Math.max(1, Math.round(r.width  * dpr));
+    cv.height = Math.max(1, Math.round(r.height * dpr));
+  }
+  if(window.ResizeObserver){ new ResizeObserver(fit).observe(scr); }
+  else { window.addEventListener('resize', fit); }
+  fit();
+
+  var G = {
+    mode: 'attract', s1: 0, s2: 0,
+    ball: { x: VW/2, y: VH/2, vx: 300, vy: 120, sp: 400 },
+    p1: { y: VH/2 }, p2: { y: VH/2 },
+    keys: {}, targetY: VH/2, blink: 0
+  };
+  var heroVis = true;
+  var vio = new IntersectionObserver(function(en){ heroVis = en[0].isIntersecting; }, { threshold: .15 });
+  vio.observe(scr);
+
+  function serve(dir){
+    var b = G.ball;
+    b.x = VW/2; b.y = VH/2; b.sp = 400;
+    var ang = Math.random() * .7 - .35;
+    b.vx = Math.cos(ang) * b.sp * dir;
+    b.vy = Math.sin(ang) * b.sp;
+  }
+  function startPlay(){
+    G.mode = 'play'; G.s1 = 0; G.s2 = 0;
+    serve(Math.random() < .5 ? -1 : 1);
+  }
+  function hit(p, dir){
+    var b = G.ball;
+    b.sp = Math.min(b.sp * 1.05, 780);
+    var off = clamp((b.y - p.y) / 52, -1, 1);
+    var ang = off * .95;
+    b.vx = Math.cos(ang) * b.sp * dir;
+    b.vy = Math.sin(ang) * b.sp;
+    b.x  = dir > 0 ? PX + PW + 10 : VW - PX - PW - 10;
+    beep(330, .05);
+  }
+  function jingle(){
+    beep(523,.09); setTimeout(function(){ beep(659,.09); }, 100);
+    setTimeout(function(){ beep(784,.14); }, 200);
+  }
+
+  scr.addEventListener('pointerdown', function(){
+    if(G.mode !== 'play'){ startPlay(); beep(660,.08); }
+  });
+  scr.addEventListener('pointermove', function(e){
+    var r = scr.getBoundingClientRect();
+    G.targetY = clamp((e.clientY - r.top) / r.height * VH, 0, VH);
+  });
+  $('#startBtn').addEventListener('click', function(){
+    startPlay(); beep(660,.08); this.blur();
+  });
+  window.addEventListener('keydown', function(e){
+    if(!heroVis) return;
+    if(e.code === 'ArrowUp' || e.code === 'ArrowDown' || e.code === 'KeyW' || e.code === 'KeyS'){
+      G.keys[e.code] = 1;
+      if(e.code.indexOf('Arrow') === 0) e.preventDefault();
+    }
+    if(e.code === 'Space'){
+      e.preventDefault();
+      if(G.mode !== 'play'){ startPlay(); beep(660,.08); }
+    }
+  });
+  window.addEventListener('keyup', function(e){ delete G.keys[e.code]; });
+
+  function step(dt){
+    var b = G.ball;
+    G.blink += dt;
+    G.p1.y += clamp(b.y - G.p1.y, -330*dt, 330*dt);
+    G.p1.y = clamp(G.p1.y, PH+6, VH-PH-6);
+    if(G.mode === 'play'){
+      if(G.keys.ArrowUp || G.keys.KeyW)        G.p2.y -= 430*dt;
+      else if(G.keys.ArrowDown || G.keys.KeyS) G.p2.y += 430*dt;
+      else G.p2.y += clamp(G.targetY - G.p2.y, -480*dt, 480*dt);
+    }else{
+      G.p2.y += clamp(b.y - G.p2.y, -300*dt, 300*dt);
+    }
+    G.p2.y = clamp(G.p2.y, PH+6, VH-PH-6);
+    if(G.mode === 'over') return;
+
+    b.x += b.vx*dt; b.y += b.vy*dt;
+    if(b.y < 9)  { b.y = 9;    b.vy = Math.abs(b.vy);   beep(220,.04,'triangle',.03); }
+    if(b.y > VH-9){ b.y = VH-9; b.vy = -Math.abs(b.vy); beep(220,.04,'triangle',.03); }
+
+    if(b.vx < 0 && b.x - 9 < PX + PW && b.x - 9 > PX - 24 && Math.abs(b.y - G.p1.y) < PH + 9) hit(G.p1, 1);
+    if(b.vx > 0 && b.x + 9 > VW - PX - PW && b.x + 9 < VW - PX + 24 && Math.abs(b.y - G.p2.y) < PH + 9) hit(G.p2, -1);
+
+    if(b.x < -20){ G.s2++; beep(150,.2,'sawtooth',.05); point(-1); }
+    if(b.x > VW+20){ G.s1++; beep(120,.2,'sawtooth',.05); point(1); }
+  }
+  function point(dir){
+    if(G.s1 >= WIN || G.s2 >= WIN){ G.mode = 'over'; jingle(); }
+    else serve(dir);
+  }
+
+  function draw(){
+    var sx = cv.width / VW, sy = cv.height / VH;
+    ctx.setTransform(sx, 0, 0, sy, 0, 0);
+    ctx.fillStyle = '#0A120C';
+    ctx.fillRect(0, 0, VW, VH);
+    ctx.strokeStyle = '#1E4A31'; ctx.lineWidth = 4; ctx.setLineDash([10,14]);
+    ctx.beginPath(); ctx.moveTo(VW/2, 10); ctx.lineTo(VW/2, VH-10); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#2E7A4F';
+    ctx.font = '14px "Press Start 2P", monospace';
+    ctx.textAlign = 'left';  ctx.fillText('CPU ' + G.s1, 34, 40);
+    ctx.textAlign = 'right'; ctx.fillText(G.s2 + ' TU', VW-34, 40);
+    ctx.fillStyle = '#63F29A';
+    ctx.fillRect(PX, G.p1.y - PH, PW, PH*2);
+    ctx.fillRect(VW-PX-PW, G.p2.y - PH, PW, PH*2);
+    ctx.fillRect(G.ball.x - 9, G.ball.y - 9, 18, 18);
+    ctx.fillStyle = '#1E4A31'; ctx.font = '8px "Press Start 2P", monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CLUB DE CALCULATOARE // EST. 1994', VW/2, VH - 18);
+
+    ctx.textAlign = 'center';
+    var blinkOn = Math.floor(G.blink * 2.2) % 2 === 0;
+    if(G.mode === 'attract'){
+      ctx.fillStyle = 'rgba(4,10,6,.55)'; ctx.fillRect(0,0,VW,VH);
+      ctx.shadowColor = '#63F29A'; ctx.shadowBlur = 10;
+      ctx.fillStyle = '#63F29A'; ctx.font = '26px "Press Start 2P", monospace';
+      ctx.fillText('JOAC\u0102 PONG', VW/2, 215);
+      ctx.shadowBlur = 0;
+      if(blinkOn){ ctx.font = '13px "Press Start 2P", monospace'; ctx.fillText('CLICK SAU SPACE', VW/2, 262); }
+      ctx.fillStyle = '#2E7A4F'; ctx.font = '9px "Press Start 2P", monospace';
+      ctx.fillText('MOUSE / S\u0102GE\u021aI / W-S \u00b7 LA 5 PUNCTE', VW/2, 300);
+    }
+    if(G.mode === 'over'){
+      ctx.fillStyle = 'rgba(4,10,6,.6)'; ctx.fillRect(0,0,VW,VH);
+      ctx.shadowColor = '#63F29A'; ctx.shadowBlur = 12;
+      ctx.fillStyle = G.s2 > G.s1 ? '#63F29A' : '#D8402B';
+      ctx.font = '24px "Press Start 2P", monospace';
+      ctx.fillText(G.s2 > G.s1 ? 'TU AI C\u00c2\u0218TIGAT!' : 'CPU AI C\u00c2\u0218TIGAT', VW/2, 225);
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = '#2E7A4F'; ctx.font = '12px "Press Start 2P", monospace';
+      ctx.fillText(G.s1 + ' \u2014 ' + G.s2, VW/2, 262);
+      if(blinkOn){ ctx.fillStyle = '#63F29A'; ctx.fillText('CLICK: \u00cenc\u0103 o dat\u0103', VW/2, 305); }
+    }
+  }
+
+  var last = performance.now();
+  function loop(now){
+    var dt = Math.min((now - last) / 1000, .033);
+    last = now;
+    if(SITE.page === 'home' && heroVis){ step(dt); draw(); }
+    requestAnimationFrame(loop);
+  }
+  serve(Math.random() < .5 ? -1 : 1);
+  requestAnimationFrame(loop);
+});
+
+/* ============ ticker ============ */
+safe(function(){
+  var tk = $('#tk');
+  if(tk) tk.innerHTML += tk.innerHTML;
+});
+
+/* ============ timeline ============ */
+safe(function(){
+  var tabs = $$('.tl-tab'), panes = $$('.tl-pane'), cursor = $('#tlCursor');
+  if(!tabs.length) return;
+  function go(i){
+    tabs.forEach(function(t, j){
+      t.classList.toggle('is-on', i === j);
+      t.setAttribute('aria-selected', i === j ? 'true' : 'false');
+    });
+    panes.forEach(function(p, j){ p.classList.toggle('is-on', i === j); });
+    if(cursor) cursor.style.left = (i * 25) + '%';
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ go(i); beep(440,.05,'triangle',.04); });
+  });
+  go(0);
+});
+
+/* ============ accordion ============ */
+safe(function(){
+  $$('.acc-head').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var acc = btn.parentElement, wasOpen = acc.classList.contains('open');
+      $$('.acc').forEach(function(a){
+        a.classList.remove('open');
+        var h = a.querySelector('.acc-head');
+        if(h) h.setAttribute('aria-expanded', 'false');
+      });
+      if(!wasOpen){ acc.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); beep(392,.05,'triangle',.04); }
+    });
+  });
+});
+
+/* ============ QUIZ ============ */
+safe(function(){
+  var QUIZ = {
+    n1: { name: 'PRIMII ANI', qs: [
+      { q: 'În ce perioadă au ajuns primele jocuri video la noi — pe calculatoare sovietice în școli și cluburi?',
+        opts: ['anii \u201960', 'anii \u201980', 'anii 2010'], c: 1,
+        why: 'Electronika BK și clonele după ZX-Spectrum au intrat în școli și cluburi încă din anii \u201980.' },
+      { q: 'Pe ce suport se „împrumutau” jocurile la începutul anilor \u201990?',
+        opts: ['casete audio', 'dischete Blu-ray', 'carduri microSD'], c: 0,
+        why: 'Un joc = 30 de minute de încărcare de pe casetă — și rugăciuni să nu se strice pe drum.' },
+      { q: 'Ce joc aduna tot cartierul în cluburile de internet din anii 2000?',
+        opts: ['Fortnite', 'Minecraft', 'Counter-Strike 1.6'], c: 2,
+        why: 'CS 1.6 a fost limbajul comun al unei generații întregi — se striga pe holuri, nu în căști.' }
+    ]},
+    n2: { name: 'GENERA\u021aIA DE AZI', qs: [
+      { q: 'Ce limbă au perfecționat-o cei mai mulți moldoveni, jucând fără traduceri?',
+        opts: ['engleza', 'japoneza', 'latina'], c: 0,
+        why: 'Meniuri, dialoguri și tutoriale — imersiune forțată înainte de prima oră de engleză din școală.' },
+      { q: 'Pentru mulți programatori din Moldova, jocurile au fost…',
+        opts: ['doar o pierdere de timp', 'poarta de intrare în IT', 'un subiect de evitat la interviuri'], c: 1,
+        why: 'Mulți au scris prima linie de „cod” ca să modifice sau să creeze mod-uri pentru jocurile preferate.' },
+      { q: 'Ce rol au jocurile pentru diaspora moldovenească?',
+        opts: ['i-a rupt complet de cei de acasă', 'i-a ținut conectați cu familia și prietenii', 'niciun rol'], c: 1,
+        why: 'Până la un milion de moldoveni sunt peste hotare — un server comun e adesea „acasă” pentru o seară.' }
+    ]}
+  };
+  var body = $('#quizBody');
+  if(!body) return;
+  var cur = 'n1', qi = 0, score = 0, results = [], answered = false;
+  var LET = ['A','B','C'];
+  function rank(s){
+    return s === 3 ? 'LEGEND\u0102 A CARTIERULUI' : s === 2 ? 'VETERAN DE CLUB'
+         : s === 1 ? '\u00ceNCEP\u0102TOR PROMI\u021a\u0102TOR' : 'MAI JOAC\u0102 O DAT\u0102';
+  }
+  function cells(){
+    var out = '';
+    for(var i = 0; i < 3; i++){
+      var cls = '';
+      if(i < results.length) cls = results[i] ? 'ok' : 'err';
+      else if(i === qi) cls = 'cur';
+      out += '<i class="' + cls + '"></i>';
+    }
+    return '<div class="q-progress">' + out + '</div>';
+  }
+  function renderQ(){
+    var qs = QUIZ[cur].qs, item = qs[qi];
+    var html = cells()
+      + '<div class="q-count">NIVEL: ' + QUIZ[cur].name + ' \u00b7 \u00cENTREBAREA ' + (qi+1) + ' / ' + qs.length + '</div>'
+      + '<h3 class="q-title">' + item.q + '</h3><div class="q-opts">';
+    item.opts.forEach(function(o, i){
+      html += '<button class="q-opt" type="button" data-i="' + i + '"><span>' + LET[i] + '</span>' + o + '</button>';
+    });
+    html += '</div><div class="q-feed" id="qFeed" hidden></div>';
+    body.innerHTML = html;
+    $$('.q-opt', body).forEach(function(b){
+      b.addEventListener('click', function(){ answer(+b.getAttribute('data-i')); });
+    });
+  }
+  function answer(i){
+    if(answered) return;
+    answered = true;
+    var item = QUIZ[cur].qs[qi], ok = (i === item.c);
+    if(ok){ score++; beep(660,.08); } else { beep(150,.12,'sawtooth'); }
+    results.push(ok);
+    $$('.q-opt', body).forEach(function(b){
+      b.disabled = true;
+      var bi = +b.getAttribute('data-i');
+      if(bi === item.c) b.classList.add('ok');
+      else if(bi === i) b.classList.add('err');
+    });
+    var last = (qi === QUIZ[cur].qs.length - 1);
+    var feed = $('#qFeed', body);
+    feed.hidden = false;
+    feed.innerHTML = '<div class="q-verdict ' + (ok ? 'ok' : 'err') + '">'
+      + (ok ? 'CORECT — +1 PUNCT' : 'GRE\u0218IT — R\u0102SPUNSUL CORECT E MARCAT') + '</div>'
+      + '<p class="q-why">' + item.why + '</p>'
+      + '<button class="q-next" type="button">' + (last ? 'VEZI REZULTATUL' : 'URM\u0102TOAREA')
+      + ' <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>';
+    feed.querySelector('.q-next').addEventListener('click', function(){
+      qi++; answered = false;
+      if(qi >= QUIZ[cur].qs.length) renderFinal(); else renderQ();
+    });
+  }
+  function renderFinal(){
+    var n = QUIZ[cur].qs.length;
+    body.innerHTML = cells()
+      + '<div class="q-final"><div class="score">' + score + '<small>/' + n + '</small></div>'
+      + '<div class="rank">' + rank(score) + '</div>'
+      + '<button class="q-restart" type="button">REIA NIVELUL'
+      + ' <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4h-4"/></svg></button></div>';
+    beep(523,.09); setTimeout(function(){ beep(784,.12); }, 110);
+    body.querySelector('.q-restart').addEventListener('click', function(){
+      qi = 0; score = 0; results = []; answered = false;
+      renderQ(); toast('NIVEL RESTAT');
+    });
+  }
+  $$('.lvl').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var l = btn.getAttribute('data-l');
+      if(l === cur) return;
+      $$('.lvl').forEach(function(b){ b.classList.toggle('is-on', b === btn); });
+      cur = l; qi = 0; score = 0; results = []; answered = false;
+      renderQ(); beep(392,.06,'triangle',.04);
+    });
+  });
+  renderQ();
+});
+
+/* ============ MUZEUL GENERAȚIEI ============ */
+safe(function(){
+  var EXH = [
+    { t:'CONSOLA DE LA PIA\u021a\u0102', n:'Dendy', y:'1993\u20132000', p:'TV + cartu\u0219e', w:'acas\u0103, \u00abla bloc\u00bb',
+      txt:'V\u00e2ndut\u0103 la pia\u021b\u0103 al\u0103turi de cartu\u0219e \u00ab9999-\u00een-1\u00bb, Dendy a fost primul \u201ecalculator de familie\u201d pe care nimeni nu-l numea calculator. Tancuri, Contra, Chip \u0219i Dale \u2014 \u0219i certele eterne pentru cine e Player 2.',
+      pal:{P:'#9B927B',B:'#17140E',R:'#D8402B'},
+      map:[".PPPPPPPPPPPPPP.","PPPPPPPPPPPPPPPP","PPPBBPPPPPPPPPPP","PPPBBPPPPPRRPRRP","PBBBBBBPPPRRPRRP","PBBBBBBPBBPPPPPP","PPPBBPPPBBPPPPPP","PPPBBPPPPPPPPPPP","PPPPPPPPPPPPPPPP",".PPPPPPPPPPPPPP."]},
+    { t:'CASETA CU COMORI', n:'ZX-Spectrum', y:'1990\u20131996', p:'calculator + caset\u0103', w:'\u00een \u0219coli \u0219i cluburi',
+      txt:'Jocul se \u00eenc\u0103rca 30 de minute de pe caset\u0103, cu un sunet ca de fax \u00eentre dou\u0103 tabere. Se strica exact \u00een momentul cel mai bun \u2014 iar caseta se \u201erepara\u201d cu un creion \u0219i o r\u0103bdare de aur.',
+      pal:{X:'#2E9E63'},
+      map:["..X.....X..","...X...X...","..XXXXXXX..",".XX.XXX.XX.","XXXXXXXXXXX","X.XXXXXXX.X","X.X.....X.X","...XX.XX..."]},
+    { t:'LEGEA CLUBULUI', n:'Mortal Kombat', y:'1995\u20132003', p:'PC (DOS / Windows)', w:'\u00een cluburile de calculatoare',
+      txt:'Coad\u0103 la dou\u0103 calculatoare \u0219i \u00abFATALITATE!\u00bb strigat \u00een cor. Aici s-au pl\u0103tit primele lei pe \u201eo or\u0103\u201d \u0219i s-au c\u00e2\u0219tigat primele revan\u0219e eterne \u2014 \u201edata viitoare sigur\u201d.',
+      pal:{O:'#E8792E',Y:'#F5C518'},
+      map:["......O...",".....OO...",".....OO...","....OOO...","....OOOO..","...OOOOO..","...OOYOO..","..OOYYOOO.","..OYYYOOO.",".OOYYYOOOO",".OYYYYOOOO","OOYYYYYOOO","OOYYYYYOOO","OOOYYYYOOO"]},
+    { t:'UN MECI \u0218I DIMINEA\u021aA', n:'Heroes III', y:'1998\u2013prezent', p:'PC \u2014 \u00abla re\u021beau\u00bb', w:'\u00een c\u0103mine studen\u021be\u0219ti \u0219i la birou',
+      txt:'\u201cHai un meci rapid\u201d \u2014 \u0219i r\u0103s\u0103rea soarele. Turnee de c\u0103min, pauzele de mas\u0103 transformate \u00een campanii, \u0219i o comunitate care joac\u0103 \u0219i azi, la 25 de ani distan\u021b\u0103.',
+      pal:{X:'#17140E',F:'#F5C518',C:'#D8402B'},
+      map:[".XXXXXXXXXXXX.",".XFFFFCCFFFFX.",".XFFFFCCFFFFX.",".XFFFFCCFFFFX.",".XFFFFCCFFFFX.",".XFFFFCCFFFFX.",".XFCCCFFCCCFX.",".XFFFFCCFFFFX.",".XFFFFCCFFFFX.",".XFFFFCCFFFFX.","..XFFFCCFFFX..","..XFFFCCFFFX..","...XFFCCFFX...","....XFCCFX....",".....XCCX.....","......XX......"]},
+    { t:'LIMBA MATERNA', n:'Counter-Strike 1.6', y:'2001\u20132008', p:'PC + re\u021beau local\u0103', w:'\u00een cluburile de internet',
+      txt:'Echipe de cartier cu nume serioase \u0219i tactici mai serioase. Primii \u201eantrenori\u201d, primele clanuri, primii prieteni pe care nu i-ai v\u0103zut niciodat\u0103 \u00een afara ecranului.',
+      pal:{R:'#D8402B'},
+      map:["               ","       R       ","       R       ","       R       ","       R       ","               ","    R     R    ","    R     R    ","               ","       R       ","       R       ","       R       ","       R       ","               "]},
+    { t:'DERBY-UL DE CARTIER', n:'FIFA', y:'1998\u2013prezent', p:'PC / console', w:'acas\u0103 \u0219i \u00een club',
+      txt:'Campionate organizate pe mize simbolice \u2014 o gustare, o cola, onoarea cartierului. Comentariul se f\u0103cea live, cu microfonul imaginar.',
+      pal:{X:'#17140E',F:'#FFFFFF',B:'#17140E'},
+      map:["....XXXX....","..XXXXXXXX..",".XXFFFFFFXX.",".XXFBBBBFXX.",".XFBBBBBBFX.",".XFBBBBBBFX.",".XXFBBBBFXX.",".XXFFFFFFXX.","..XXXXXXXX..","....XXXX...."]},
+    { t:'56K SPRE ALT\u0102 LUME', n:'Lumi online', y:'2005\u20132012', p:'PC + internet', w:'acas\u0103, \u00een papuci',
+      txt:'C\u00e2nd netul a ajuns \u00een apartamente, cluburile s-au golit, dar guild-urile s-au umplut de moldoveni. Ping-ul era mare, dar \u201eun meci \u00een plus\u201d la ora dou\u0103 noaptea nu se refuza niciodat\u0103.',
+      pal:{X:'#17140E',F:'#79C99A',M:'#2B7A8A'},
+      map:["....XXXXXX....","..XXXFFFFXXX..",".XXFFFMMFFFXX.",".XXFFFMMFFFXX.",".XXFFFMMFFFXX.",".XMMMMMMMMMMX.",".XXFFFMMFFFXX.",".XXFFFMMFFFXX.",".XXFFFMMFFFXX.","..XXXFFFFXXX..","....XXXXXX...."]},
+    { t:'CHI\u0218INAUL, CUB CU CUB', n:'Minecraft', y:'2012\u2013prezent', p:'PC / mobil / console', w:'oriunde',
+      txt:'Genera\u021bia care \u00eenva\u021b\u0103 logic\u0103 \u0219i r\u0103bdare construind. Pe serverele de \u0219coal\u0103, copiii au reconstruit ora\u0219ul \u2014 din cuburi \u2014 mai frumos dec\u00e2t \u00een realitate, cum spuneau ei.',
+      pal:{G:'#2E9E63',g:'#79C99A',B:'#8A5A2B',d:'#5C3A1D'},
+      map:["GGGGGGGGGGGG","gGGGgGGgGGGg","GgGGGGgGGGgG","BBdBBgBBBdBB","BdBBBBdBBBdB","BBBdBBBBBdBB","BdBBBBdBBBBd","BBBdBBBdBBBB","BdBBBBBBdBBB","BBBdBBBBBdBB","BdBBdBBBBBdB","BBBBdBBBdBBB"]}
+  ];
+
+  var list = $('#muzList'), cvS = $('#spr'), bar = $('#sprBar');
+  if(!list || !cvS) return;
+  var c2 = cvS.getContext('2d');
+  var cur = 0, animId = 0;
+
+  list.innerHTML = EXH.map(function(e, i){
+    return '<button class="muz-item" type="button" data-i="' + i + '"><b>E.0' + (i+1) + '</b><span>' + e.n + '</span><em>' + e.y.split('\u2013')[0] + '</em></button>';
+  }).join('');
+  $$('.muz-item', list).forEach(function(b){
+    b.addEventListener('click', function(){ show(+b.getAttribute('data-i'), true); beep(392,.05,'triangle',.04); });
+  });
+
+  function draw(e, animate){
+    var rows = e.map.length, cols = e.map[0].length;
+    var cell = Math.max(8, Math.floor(280 / Math.max(rows, cols)));
+    cvS.width = cols * cell; cvS.height = rows * cell;
+    cvS.style.width = cvS.width + 'px';
+    cvS.style.height = cvS.height + 'px';
+    var cells = [];
+    e.map.forEach(function(row, y){
+      row.split('').forEach(function(ch, x){
+        if(e.pal[ch]) cells.push([x, y, e.pal[ch]]);
+      });
+    });
+    var myId = ++animId;
+    if(!animate){
+      cells.forEach(function(c){ c2.fillStyle = c[2]; c2.fillRect(c[0]*cell, c[1]*cell, cell, cell); });
+      if(bar) bar.style.width = '100%';
+      return;
+    }
+    var order = cells.slice().sort(function(a, b){
+      return (a[1] + Math.random()*.9) - (b[1] + Math.random()*.9);
+    });
+    var dur = 800, t0 = performance.now();
+    function tick(now){
+      if(myId !== animId) return;
+      var p = Math.min((now - t0) / dur, 1);
+      var n = Math.floor(order.length * p);
+      c2.clearRect(0, 0, cvS.width, cvS.height);
+      for(var i = 0; i < n; i++){
+        c2.fillStyle = order[i][2];
+        c2.fillRect(order[i][0]*cell, order[i][1]*cell, cell, cell);
+      }
+      if(bar) bar.style.width = (p * 100) + '%';
+      if(p < 1) requestAnimationFrame(tick);
+      else { if(bar) bar.style.width = '100%'; beep(880,.06,'triangle',.04); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function show(i, animate){
+    cur = i;
+    $$('.muz-item', list).forEach(function(b, j){
+      b.classList.toggle('is-on', i === j);
+      b.setAttribute('aria-selected', i === j ? 'true' : 'false');
+    });
+    var e = EXH[i];
+    $('#mTag').textContent = 'EXPONAT E.0' + (i+1) + ' // ' + e.t;
+    $('#mName').textContent = e.n;
+    $('#mYears').textContent = e.y;
+    $('#mPlat').textContent = e.p;
+    $('#mWhere').textContent = e.w;
+    $('#mText').textContent = e.txt;
+    var d = $('#muzDetail');
+    d.classList.remove('fadein');
+    void d.offsetWidth;
+    d.classList.add('fadein');
+    draw(e, animate);
+  }
+  show(0, false);
+  window.__muzRefresh = function(){ show(cur, true); };
+  /* dacă pagina s-a deschis direct pe #/muzeu, animăm exponatul */
+  if(SITE.page === 'muzeu') show(0, true);
+});
+
+/* ============ SONDAJUL DE CARTIER ============ */
+safe(function(){
+  var Q = 'Unde te-au „prins” pe tine jocurile?';
+  var OPTS = [
+    { l:'La Dendy, \u00een fa\u021ba televizorului', s:47 },
+    { l:'\u00cen club, la or\u0103 pl\u0103tit\u0103', s:61 },
+    { l:'Acas\u0103, pe internet', s:38 },
+    { l:'Azi, pe stream \u0219i pe mobil', s:24 }
+  ];
+  var KEY = 'ci_rm_poll', box = $('#poll');
+  if(!box) return;
+  var v = store.get(KEY);
+  var voted = (v === null || v === undefined) ? null : +v;
+  var NOTE = 'SONDAJ DEMONSTRATIV \u2014 CIFRELE DE START SUNT SIMULATE; VOTUL T\u0102U SE SALVEAZ\u0102 DOAR \u00ceN ACEST BROWSER.';
+
+  function render(){
+    if(voted === null){
+      var html = '<p class="poll-q">' + Q + '</p><div class="poll-opts">';
+      OPTS.forEach(function(o, i){
+        html += '<button class="poll-opt" type="button" data-i="' + i + '"><span>' + 'ABCD'[i] + '</span>' + o.l + '</button>';
+      });
+      html += '</div><p class="poll-note">' + NOTE + '</p>';
+      box.innerHTML = html;
+      $$('.poll-opt', box).forEach(function(b){
+        b.addEventListener('click', function(){
+          voted = +b.getAttribute('data-i');
+          store.set(KEY, voted);
+          beep(660,.08);
+          render();
+        });
+      });
+    }else{
+      var counts = OPTS.map(function(o, i){ return o.s + (voted === i ? 1 : 0); });
+      var tot = counts.reduce(function(a, b){ return a + b; }, 0);
+      var html = '<p class="poll-q">' + Q + '</p><div class="poll-res">';
+      OPTS.forEach(function(o, i){
+        var p = Math.round(counts[i] * 100 / tot);
+        html += '<div class="prow' + (i === voted ? ' you' : '') + '">'
+          + '<div class="plabel"><span>' + o.l + (i === voted ? ' \u2014 AI VOTAT TU' : '') + '</span><b>' + p + '%</b></div>'
+          + '<div class="pbar"><i data-w="' + p + '"></i></div></div>';
+      });
+      html += '</div><button class="poll-reset" type="button">VOTEAZ\u0102 DIN NOU</button>'
+            + '<p class="poll-note">' + NOTE + '</p>';
+      box.innerHTML = html;
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        $$('.pbar i', box).forEach(function(el){ el.style.width = el.getAttribute('data-w') + '%'; });
+      }); });
+      $('.poll-reset', box).addEventListener('click', function(){
+        store.del(KEY); voted = null; render(); toast('VOT RESTAT');
+      });
+    }
+  }
+  render();
+});
+
+/* ============ reveal la derulare ============ */
+safe(function(){
+  if(!window.IntersectionObserver){
+    $$('.reveal').forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  $$('.reveal').forEach(function(el){ io.observe(el); });
+});
+</script>
+</body>
+</html>
